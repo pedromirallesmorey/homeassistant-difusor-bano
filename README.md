@@ -8,9 +8,6 @@ Este proyecto incluye:
 - 🔘 Lógica que apaga automáticamente el humidificador 5 minutos después de activarlo manualmente (botón físico, app, etc.).
 - 💡 Scripts que controlan tanto el humidificador como la bombilla incorporada.
 
-## 📁 Estructura
-
-
 
 ## 🚀 Importar directamente
 
