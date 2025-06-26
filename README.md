@@ -8,25 +8,17 @@ Este proyecto incluye:
 - 🔘 Lógica que apaga automáticamente el humidificador 5 minutos después de activarlo manualmente (botón físico, app, etc.).
 - 💡 Scripts que controlan tanto el humidificador como la bombilla incorporada.
 
-
-## 🚀 Importar directamente
-
-Si quieres usar esta automatización como blueprint desde GitHub:
-
-[![Importar Blueprint en Home Assistant](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?repository_url=https://github.com/pedromirallesmorey/difusor-bano&file_path=blueprints/automation/tu_usuario/difusor_bano_automatico.yaml)
-
 ---
 
 ## 🛠️ Instrucciones
 
-### 1. Subida manual
-- Copia el blueprint a:  
-  `/config/blueprints/automation/tu_usuario/difusor_bano_automatico.yaml`
+### 1. Crear los dos scripts
 - Añade los scripts a través del editor de scripts o en `scripts.yaml`.
 
-### 2. Crear la automatización
-- Ve a **Automatizaciones → Crear → Usar Blueprint**
-- Elige el blueprint: `Difusor baño automático + apagado tras encendido manual`
+### 2. Crear las dos automatizaciones
+- Ve a **Automatizaciones → Crear**
+- Edita en modo yaml y pega el código de ambas automatizaciones.
+- (`Difusor aromas baño`) y (`Difusor baño - apagado automático tras encendido manual`)
 - Selecciona:
   - El humidificador (`humidifier.humidificador_bano`)
   - Script de encendido (`script.humidificador_bano_on`)
