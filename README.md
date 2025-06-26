@@ -1,5 +1,16 @@
 # homeassistant-difusor-bano
-💨 Automatización inteligente para difusor de baño (Home Assistant)
+
+# 💨 Automatización inteligente para difusor de baño (Home Assistant)
+
+Este proyecto incluye:
+
+- 🕑 Automatización que enciende un humidificador cada 2 horas entre las 06:00 y las 21:00.
+- 🔘 Lógica que apaga automáticamente el humidificador 5 minutos después de activarlo manualmente (botón físico, app, etc.).
+- 💡 Scripts que controlan tanto el humidificador como la bombilla incorporada.
+
+## 📁 Estructura
+
+
 
 ## 🚀 Importar directamente
 
