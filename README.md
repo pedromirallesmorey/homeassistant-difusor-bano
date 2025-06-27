@@ -5,8 +5,9 @@
 Este proyecto incluye:
 
 - 🕑 Automatización que enciende un humidificador cada 2 horas entre las 06:00 y las 21:00.
+- 🕑 Automatización que avisa si el humidificador se queda sin agua.
 - 🔘 Lógica que apaga automáticamente el humidificador 5 minutos después de activarlo manualmente (botón físico, app, etc.).
-- 💡 Scripts que controlan tanto el humidificador como la bombilla incorporada.
+- 💡 Scripts que controlan tanto el humidificador como la luz incorporada.
 
 ---
 
@@ -15,20 +16,22 @@ Este proyecto incluye:
 ### 1. Crear los dos scripts
 - Añade los scripts a través del editor de scripts o en `scripts.yaml`.
 
-### 2. Crear las dos automatizaciones
+### 2. Crear las automatizaciones
 - Ve a **Automatizaciones → Crear**
-- Edita en modo yaml y pega el código de ambas automatizaciones.
-- (`Difusor aromas baño`) y (`Difusor baño - apagado automático tras encendido manual`)
+- Edita en modo yaml y pega el código de las automatizaciones.
+- (`Difusor aromas baño`), (`Difusor baño - apagado automático tras encendido manual`), (`Difusor Baño - Notificar si se queda sin agua`)
 - Selecciona:
   - El humidificador (`humidifier.humidificador_bano`)
   - Script de encendido (`script.humidificador_bano_on`)
   - Script de apagado (`script.humidificador_bano_off`)
+  - Medio de comunicación (`notify.alexa_media_echo_dot`)
 
 ### 3. ¡Listo!
 Tu baño quedará automatizado para que el difusor:
 - Se active automáticamente cada 2 horas.
 - Se apague tras 5 minutos.
 - También se apague automáticamente si tú lo activas manualmente.
+- Avise si se queda sin agua.
 
 ---
 
@@ -64,7 +67,7 @@ sequence:
       entity_id: light.humidificador_bano_lightbulb
 ```
 
-## 🧭 Automatización 1
+## 🧭 Automatización 1 (Difusor aromas baño)
 ```
 alias: Difusor aromas baño
 description: ""
@@ -109,7 +112,7 @@ mode: queued
 max: 3
 ```
 
-## 🖲️ Automatización 2
+## 🖲️ Automatización 2 (Difusor baño - apagado automático tras encendido manual)
 
 ```
 alias: Difusor baño - apagado automático tras encendido manual
@@ -128,4 +131,36 @@ actions:
     data: {}
 
 mode: restart
+```
+
+## 💧 Automatización 3 (Difusor Baño - Notificar si se queda sin agua)
+
+```
+alias: Difusor Baño - Notificar si se queda sin agua
+description: ""
+triggers:
+  - entity_id: switch.humidificador_bano
+    to: "on"
+    trigger: state
+actions:
+  - wait_for_trigger:
+      - entity_id: switch.humidificador_bano
+        to: "off"
+        trigger: state
+    timeout: "00:00:10"
+    continue_on_timeout: false
+  - action: notify.alexa_media_echo_dot
+    metadata: {}
+    data:
+      message: >-
+        El Difusor del baño está sin agua. Por favor, rellénalo lo antes
+        posible.
+  - action: notify.whatsapp
+    metadata: {}
+    data:
+      message: >-
+        El Difusor del baño está sin agua. Por favor, rellénalo lo antes
+        posible.
+      title: Humidificador Baño
+mode: single
 ```
